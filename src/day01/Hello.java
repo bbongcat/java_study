@@ -1,3 +1,5 @@
+package day01;
+
 /**
  * API 문서 주석
  *
