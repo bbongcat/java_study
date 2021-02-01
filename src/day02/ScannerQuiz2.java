@@ -11,7 +11,15 @@ public class ScannerQuiz2 {
         System.out.print("얼마 있어요?? ");
         int money = sc.nextInt();
 
-        if (money <= 6000)
+        if (money >= 5000) {
+            System.out.println("선택된 음식: 김치찌개");
+        } else if (money >= 2500) {
+            System.out.println("선택된 음식: 라면");
+        } else {
+            System.out.println("선택된 음식: 굶어!");
+        }
+
+        sc.close();
 
     }
 }

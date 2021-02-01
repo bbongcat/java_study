@@ -27,6 +27,7 @@ public class Variable {
 
         //텍스트를 저장할 때는 String 타입을 사용
         String nickname = "홍길동";
+        System.out.println("nickname = " + nickname);
         //nickname = 500;
 
         //같은 이름으로 중복 선언 불가능(타입이 달라도 불가)
