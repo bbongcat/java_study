@@ -1,4 +1,4 @@
-package com.oop.myapp.idol;
+package day09.com.oop.myapp.idol;
 
 public class Member {
 

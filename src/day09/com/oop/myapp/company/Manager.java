@@ -1,6 +1,6 @@
-package com.oop.myapp.company;
+package day09.com.oop.myapp.company;
 
-import com.oop.myapp.idol.GirlGroup;
+import day09.com.oop.myapp.idol.GirlGroup;
 
 public class Manager {
 
