@@ -34,7 +34,8 @@ public class Mage extends Player {
 
     public Mage(String name) {
         this.name = name;
-        this.hp = 50;
+        this.hp = 40;
+        this.jobName = "마법사";
     }
 
     @Override

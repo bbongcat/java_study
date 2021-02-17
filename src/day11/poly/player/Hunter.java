@@ -7,6 +7,7 @@ public class Hunter extends Player {
     public Hunter(String name) {
         this.name = name;
         this.hp = 60;
+        this.jobName = "사냥꾼";
     }
 
     void multiShot() {}

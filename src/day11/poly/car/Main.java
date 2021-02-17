@@ -53,5 +53,12 @@ public class Main {
         ((Sonata)newCar).joinMembership();
          */
 
+        System.out.println("==========================");
+
+        CarShop shop = new CarShop();
+        int money = shop.sellCar(new Sonata());
+        System.out.println("차 판매 수령액: " + money);
+
+
     }
 }

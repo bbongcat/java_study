@@ -7,6 +7,7 @@ package day11.poly.player;
 public class Player {
 
     String name;
+    String jobName;
     int level;
     int hp;
 
