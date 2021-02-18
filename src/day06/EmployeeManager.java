@@ -34,7 +34,7 @@ public class EmployeeManager {
     static String[] append(String[] arr, String data) {
         //배열의 사이즈를 1 증가시킴
         String[] temp = new String[count + 1];
-        for (int i=0; i < count; i++) {
+        for (int i = 0; i < count; i++) {
             temp[i] = arr[i];
         }
         //새로운 데이터를 추가
@@ -52,7 +52,7 @@ public class EmployeeManager {
         while (true) {
             //flag가 true면 중복되었음을 의미
             boolean flag = false;
-            for (int i=0; i < empNumbers.length; i++) {
+            for (int i = 0; i < empNumbers.length; i++) {
                 if (empNum.equals(empNumbers[i])) {
                     //사번이 중복된 경우
                     flag = true;
@@ -104,10 +104,14 @@ public class EmployeeManager {
         String answer = sc.next();
 
         switch (answer) {
-            case "Y": case "y": case "ㅛ":
+            case "Y":
+            case "y":
+            case "ㅛ":
                 sc.close();
                 System.exit(0); //프로그램 종료 메서드
-            case "N": case "n": case "ㅜ":
+            case "N":
+            case "n":
+            case "ㅜ":
                 System.out.println("프로그램 종료를 취소합니다.");
                 return;
             default:
@@ -123,7 +127,7 @@ public class EmployeeManager {
             System.out.printf("%s%10s%10s%10s\n", "사번", "이름", "나이", "부서");
             System.out.println("========================================================");
 
-            for (int i=0; i < count; i++) {
+            for (int i = 0; i < count; i++) {
                 System.out.printf("%s%10s%10s세%10s\n",
                         empNumbers[i], names[i], ages[i], departments[i]);
             }
@@ -133,6 +137,7 @@ public class EmployeeManager {
             System.out.println("\n현재 등록된 사원의 정보가 없습니다.");
         }
     }
+
     // 사원 번호를 입력받아 리턴하는 메서드
     static String inputEmpNumber(String data) {
         System.out.printf("%s하실 사원의 번호를 입력하세요.\n", data);
@@ -211,12 +216,12 @@ public class EmployeeManager {
 
     // 배열 삭제 메서드
     static String[] remove(String[] arr, int index) {
-        for (int i=index; i < count-1; i++) {
-            arr[i] = arr[i+1];
+        for (int i = index; i < count - 1; i++) {
+            arr[i] = arr[i + 1];
         }
         //배열 복사
-        String[] temp = new String[arr.length-1];
-        for (int i=0; i < temp.length; i++) {
+        String[] temp = new String[arr.length - 1];
+        for (int i = 0; i < temp.length; i++) {
             temp[i] = arr[i];
         }
 
@@ -246,10 +251,14 @@ public class EmployeeManager {
             System.out.print("> ");
             String trigger = sc.next();
             switch (trigger) {
-                case "y": case "Y": case "ㅛ":
+                case "y":
+                case "Y":
+                case "ㅛ":
                     processDel(index);
                     break;
-                case "n": case "N": case "ㅜ":
+                case "n":
+                case "N":
+                case "ㅜ":
                     System.out.println("# 정보 삭제를 취소합니다.");
                     break;
             }
@@ -264,7 +273,14 @@ public class EmployeeManager {
 
             showMenu();
             System.out.print("> ");
-            int menuNum = sc.nextInt();
+            int menuNum = 0;
+            try {
+                menuNum = sc.nextInt();
+            } catch (Exception e) {
+                System.out.println("메뉴는 숫자만 입력하세요!");
+                sc.nextLine();
+                continue;
+            }
 
             if (menuNum == 1) {
                 insertEmpData();
