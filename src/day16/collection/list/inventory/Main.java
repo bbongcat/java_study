@@ -32,7 +32,7 @@ public class Main {
         System.out.println();
     }
 
-    //제품 개별 검색 기능
+    // 제품 개별 검색 기능
     private static void searchProduct() {
         System.out.println("\n# 조회하실 제품의 바코드 번호를 입력하세요.");
         System.out.print("> ");
@@ -50,6 +50,40 @@ public class Main {
             System.out.println("해당 제품은 존재하지 않습니다.");
         }
     }
+
+    // 제품 정보 수정 기능
+    private static void modifyProduct() {
+        System.out.println("\n# 수정하실 제품의 바코드 번호를 입력하세요.");
+        System.out.print("> ");
+        String barcode = sc.next();
+
+        Product product = inventory.getProduct(barcode);
+
+        if (product != null) {
+            System.out.printf("변경 가격을 입력해주세요. 현재 가격: %d원\n> ", product.getPrice());
+            inventory.updatePrice(product, sc.nextInt());
+        } else {
+            System.out.println("해당 제품은 존재하지 않습니다.");
+        }
+    }
+
+    // 제품 정보 삭제 기능
+    private static void deleteProduct() {
+
+        System.out.println("\n# 삭제하실 제품의 코드 번호를 입력하세요.");
+        System.out.print("> ");
+        String barcode = sc.next();
+
+        Product product = inventory.getProduct(barcode);
+
+        if (product != null) {
+            System.out.printf("변경 가격을 입력해주세요. 현재 가격: %d원\n> ", product.getPrice());
+            inventory.updatePrice(product, sc.nextInt());
+        } else {
+            System.out.println("해당 제품은 존재하지 않습니다.");
+        }
+    }
+
 
     public static void main(String[] args) {
 
@@ -84,8 +118,10 @@ public class Main {
                     searchProduct();
                     break;
                 case 4:
+                    modifyProduct();
                     break;
                 case 5:
+                    deleteProduct();
                     break;
                 case 6:
                     System.out.println("프로그램을 종료합니다.");
@@ -98,5 +134,6 @@ public class Main {
         }
 
     }
+
 
 }

@@ -22,7 +22,7 @@ public class Inventory {
         if (products.contains(product)) {
             products.get(products.indexOf(product));
             product.setPrice(newPrice);
-            System.out.printf("가격이 %d원으로 변경되었습니댜.\n", newPrice);
+            System.out.printf("가격이 %d원으로 변경되었습니다.\n", newPrice);
         } else {
             System.out.println("검색하신 제품은 존재하지 않습니다.");
         }
