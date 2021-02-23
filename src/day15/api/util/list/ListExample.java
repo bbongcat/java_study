@@ -1,6 +1,8 @@
 package day15.api.util.list;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class ListExample {
@@ -43,13 +45,13 @@ public class ListExample {
         sList.remove("개굴이");
         sList.remove(str1);
         System.out.println("sList = " + sList);
-        
+
         // list에 저장된 객체 참조하기: get(index)
         String data = sList.get(2);
         System.out.println("data = " + data);
 
         System.out.println("======================");
-        
+
         // list의 반복문 처리
         for (int i = 0; i < sList.size(); i++) {
             System.out.println(sList.get(i));
@@ -75,7 +77,7 @@ public class ListExample {
         sList.clear();
         System.out.println("sList = " + sList);
         System.out.println("size = " + sList.size());
-        
+
         List<Integer> numbers = new ArrayList<>();
         numbers.add(30);
         numbers.add(45);
@@ -86,6 +88,22 @@ public class ListExample {
 
         // Object 리스트. 타입에 상관없이 담을 수 있으나 관리 상 비추천
         List<Object> objList = new ArrayList<>();
-        
+
+        // 초기 값들이 들어있는 리스트 생성법
+//        List<Integer> numberList = Arrays.asList(50, 60, 85, 30, 10, 40);
+        List<Integer> numberList = new ArrayList<>(Arrays.asList(
+                50, 60, 85, 30, 10, 40));
+        System.out.println("================================");
+        numberList.add(100);
+        System.out.println("numberList = " + numberList);
+
+        // 오름차 정렬
+        numberList.sort(Integer::compareTo);
+        System.out.println("numberList = " + numberList);
+
+        // 내림차 정렬
+        numberList.sort(Comparator.reverseOrder());
+        System.out.println("numberList = " + numberList);
+
     }
 }
