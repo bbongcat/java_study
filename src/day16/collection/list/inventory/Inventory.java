@@ -1,8 +1,9 @@
 package day16.collection.list.inventory;
 
+import java.io.*;
 import java.util.*;
 
-public class Inventory {
+public class Inventory implements Serializable {
 
     private List<Product> products;
 

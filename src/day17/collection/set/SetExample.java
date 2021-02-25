@@ -11,9 +11,9 @@ public class SetExample {
 
         // set에 객체 추가 : add(객체)
         set.add("닭강정");
-        boolean b1 = set.add("김말이");
+        boolean b1 = set.add("김말이"); // 정상 등록 시 true 반환
         set.add("단무지");
-        boolean b2 = set.add("김말이");
+        boolean b2 = set.add("김말이"); // 중복 시 false 반환
         System.out.println("첫번째 김말이 추가: " + b1);
         System.out.println("두번째 김말이 추가: " + b2);
 

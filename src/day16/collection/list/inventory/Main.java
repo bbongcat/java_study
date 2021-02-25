@@ -1,8 +1,9 @@
 package day16.collection.list.inventory;
 
+import java.io.*;
 import java.util.Scanner;
 
-public class Main {
+public class Main implements Serializable {
 
     private static Inventory inventory = new Inventory();
     public static Scanner sc = new Scanner(System.in);

@@ -3,6 +3,7 @@ package day17.collection.map.song;
 import java.util.*;
 import java.io.*;
 
+// set을 list로 바꾸기
 public class MainClass {
     static Map<String, Set<String>> artists = new HashMap<>();
     static Set<String> songs = null;
@@ -84,6 +85,24 @@ public class MainClass {
 		 "# 이미 등록된 노래입니다."를 출력하세요.
 		 */
 
+        // 신규 아티스트의 노래셋을 생성
+
+        // 신규 아티스트 판단 조건
+        if (!artists.containsKey(artist)) { // 신규등록
+            songs = new HashSet<>();
+            songs.add(song);
+            artists.put(artist, songs);
+            System.out.printf("# 아티스트 %s님이 신규 등록되었습니다\n", artist);
+        } else { // 기존등록
+            Set<String> songList = artists.get(artist);
+            if (songList.add(song)) {
+                System.out.printf("# 아티스트 %s님의 노래목록에 '%s'이(가) 추가되었습니다.\n"
+                        , artist, song);
+            } else {
+                System.out.println("# 이미 등록된 노래입니다.");
+            }
+        }
+
         saveData();
     }
 
@@ -99,6 +118,19 @@ public class MainClass {
 		      [abc, def, ghi, jkl ...]
 		 2. 등록된 가수가 아니라면 "해당 아티스트는 등록되지 않았습니다."를 출력.
 		 */
+
+        if (artists.containsKey(artist)) {
+            System.out.printf("\n# %s님의 노래 목록 # \n", artist);
+            System.out.println("=============================");
+            int number = 1;
+            for (String song : artists.get(artist)) {
+                System.out.printf("%d. %s\n", number, song);
+                number++;
+            }
+        } else {
+            System.out.println("# 해당 아티스트는 등록되지 않았습니다.");
+        }
+
     }
 
     // 입력된 노래데이터를 저장하는 메서드
@@ -120,6 +152,7 @@ public class MainClass {
 
             // 성적정보가 저장된 리스트를 파일에 저장
             oos.writeObject(artists);
+
         } catch (FileNotFoundException e) {
             System.out.println("해당 경로가 존재하지 않습니다.");
         } catch (IOException e) {
