@@ -3,10 +3,9 @@ package day17.collection.map.song;
 import java.util.*;
 import java.io.*;
 
-// set을 list로 바꾸기
 public class MainClass {
-    static Map<String, Set<String>> artists = new HashMap<>();
-    static Set<String> songs = null;
+    static Map<String, List<String>> artists = new HashMap<>();
+    static List<String> songs = null;
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -20,6 +19,7 @@ public class MainClass {
 //        loadData(); // 저장된 데이터 자동 불러오기 기능
         while (true) {
 
+            loadData();
             showMenu();
             int menu = inputMenu();
 
@@ -32,6 +32,9 @@ public class MainClass {
                     searchMusic();
                     break;
                 case 3:
+                    deleteMusic();
+                    break;
+                case 4:
                     System.out.println("프로그램을 종료합니다.");
                     sc.close();
                     System.exit(0);
@@ -42,12 +45,58 @@ public class MainClass {
         }
     }
 
+    private static void deleteMusic() {
+        System.out.println("\n# 삭제할 아티스트의 이름을 입력해주세요.");
+        sc.nextLine();
+        System.out.print("- 가수명: ");
+        String artist = sc.nextLine();
+
+        if (artists.containsKey(artist)) {
+            System.out.println("# [1. 아티스트의 모든 곡 삭제 / 2. 특정 곡 삭제]");
+            System.out.print("> ");
+            int selectNum = 0;
+            try {
+                selectNum = sc.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("# 메뉴는 숫자로만 입력하세요.");
+                sc.nextLine();
+            }
+
+            switch (selectNum) {
+                case 1:
+                    System.out.printf("%s의 곡 %d개 전부 삭제합니다.\n"
+                            , artist, artists.size());
+                    artists.remove(artist);
+                    saveData();
+                    break;
+                case 2:
+                    System.out.println("현재 등록된 아티스트의 곡: " + artists.get(artist));
+                    System.out.print("삭제할 곡을 입력해주세요: ");
+                    String songName = sc.next();
+                    List<String> songList = artists.get(artist);
+                    if (songList.contains(songName)) {
+                        int idx = songList.indexOf(artist);
+                        songList.remove(idx);
+                        System.out.println("# 곡이 삭제되었습니다.");
+                    } else {
+                        System.out.println("# 등록되지 않은 곡입니다.");
+                        sc.nextLine();
+                    }
+            }
+        } else {
+            System.out.println("등록된 아티스트가 아닙니다.");
+        }
+
+        saveData();
+    }
+
     public static void showMenu() {
         System.out.println("\n\n\n*** 음악 관리 프로그램 ***");
         System.out.printf("# [현재 등록된 가수: %d명]\n", artists.size());
         System.out.println("# 1. 노래 등록하기");
         System.out.println("# 2. 노래 정보 검색");
-        System.out.println("# 3. 프로그램 종료");
+        System.out.println("# 3. 노래 삭제하기");
+        System.out.println("# 4. 프로그램 종료");
         System.out.println("*********************");
     }
 
@@ -68,8 +117,8 @@ public class MainClass {
 
     public static void insertMusic() {
         System.out.println("\n# 노래 등록을 시작합니다.");
-        System.out.print("- 가수명: ");
         sc.nextLine();
+        System.out.print("- 가수명: ");
         String artist = sc.nextLine();
         System.out.print("- 곡명: ");
         String song = sc.nextLine();
@@ -89,15 +138,16 @@ public class MainClass {
 
         // 신규 아티스트 판단 조건
         if (!artists.containsKey(artist)) { // 신규등록
-            songs = new HashSet<>();
+            songs = new ArrayList<>();
             songs.add(song);
             artists.put(artist, songs);
             System.out.printf("# 아티스트 %s님이 신규 등록되었습니다\n", artist);
         } else { // 기존등록
-            Set<String> songList = artists.get(artist);
-            if (songList.add(song)) {
+            List<String> songList = artists.get(artist);
+            if (!songList.contains(song)) {
                 System.out.printf("# 아티스트 %s님의 노래목록에 '%s'이(가) 추가되었습니다.\n"
                         , artist, song);
+                songList.add(song);
             } else {
                 System.out.println("# 이미 등록된 노래입니다.");
             }
@@ -107,12 +157,12 @@ public class MainClass {
     }
 
     public static void searchMusic() {
-        System.out.println("\n# 노래를 검색할 가수명을 입력하세요.");
-        System.out.println("- 가수명: ");
         sc.nextLine();
+        System.out.println("\n# 노래를 검색할 가수명을 입력하세요.");
+        System.out.print("- 가수명: ");
         String artist = sc.nextLine();
         /*
-		 1. 가수명을 입력받아 해당 가수명에 매핑되어 저장되어있는 Set컬렉션을
+		 1. 가수명을 입력받아 해당 가수명에 매핑되어 저장되어있는 List컬렉션을
 		  출력하세요.
 		  ex) * xxx님의 노래목록 *
 		      [abc, def, ghi, jkl ...]
@@ -179,7 +229,7 @@ public class MainClass {
             ois = new ObjectInputStream(fis);
 
             //readObject는 파일에 저장된 객체를 Object 타입으로 리턴한다.
-            artists = (Map<String, Set<String>>) ois.readObject();
+            artists = (Map<String, List<String>>) ois.readObject();
         } catch (Exception e) {
 
         } finally {
