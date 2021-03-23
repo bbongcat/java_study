@@ -4,7 +4,11 @@ import java.util.Arrays;
 
 public class ArrayBasic {
     public static void main(String[] args) {
-        
+
+        //Arrays.stream(배열).filter(요소 -> 조건).toArray();
+        //배열을 넣고 조건에 맞는 요소를 toArray로 배열로 리턴해줌
+        //예제: Arrays.stream(arr).filter(element -> element%divisor==0).toArray();
+
         // 1. 배열 변수 선언
         int[] points;
         //int points[]; - c언어 스타일. 자바에선 쓰지 말 것

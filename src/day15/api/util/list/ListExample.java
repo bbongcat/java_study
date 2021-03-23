@@ -105,5 +105,9 @@ public class ListExample {
         numberList.sort(Comparator.reverseOrder());
         System.out.println("numberList = " + numberList);
 
+        // List가 비었는지 확인 : isEmpty()
+        List<Integer> empty = new ArrayList<>();
+        System.out.println(empty.isEmpty());
+
     }
 }
